@@ -1,0 +1,43 @@
+{
+    "appState": {
+        "interfaceConfiguration": {
+            "commonConfiguration": {
+                "videosMap": {
+                    "byId": {
+                        "1": {
+                            "id": "1",
+                            "title": "VAPE 1605",
+                            "videoDetailId": "1"
+                        }
+                    },
+                    "allIds": ["1"]
+                },
+                "videoDetailMap": {
+                    "byId": {
+                        "1": {
+                            "id": "1",
+                            "detail": "Voy A Por Ello",
+                            "url": "https://youtube.com/vape"
+                        }
+                    },
+                    "allIds": ["1"]
+                },
+                "videoComplete": {
+                    "byId": {
+                        "1": {
+                            "id": "1",
+                            "videoId": "1",
+                            "videoDetailId": "1"
+                        }
+                    },
+                    "allIds": ["1"]
+                }
+            }
+        },
+        "ui": {
+            "videoSearchBarModule": {
+                "videoSearchViewModel": {}
+            }
+        }
+    }
+}
