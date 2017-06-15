@@ -8,6 +8,8 @@ import {
     combinedReducers
 } from './rootReducer';
 
+import { appState } from './initialState';
+
 declare const __DEV__: string; // from webpack
 let ISDEV: boolean = false;
 if (__DEV__ == "dev") {
@@ -23,5 +25,6 @@ declare let window: any;
 
 export const store = createStore(
     combinedReducers,
+    appState,
     redux.compose(redux.applyMiddleware(...middlewares), window.devToolsExtension ? window.devToolsExtension() : (f: any) => f)
 );

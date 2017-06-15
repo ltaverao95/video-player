@@ -2,14 +2,24 @@ import * as React from 'react';
 import {
     Grid,
     Row,
-    Col,
-    Panel,
-    Media
+    Col
 } from 'react-bootstrap';
 
 import {
     VideoSearchBarContainer
 } from '../../video-search-bar/containers/VideoSearchBarContainer';
+
+import {
+    VideoPlayerContainer
+} from '../../video-player/containers/VideoPlayerContainer';
+
+import {
+    VideoDetail
+} from '../../video-detail/components/VideoDetail';
+
+import {
+    VideoListContainer
+} from '../../video-list/containers/VideoListContainer';
 
 export class VideoHome extends React.Component<undefined, undefined>{
 
@@ -29,51 +39,15 @@ export class VideoHome extends React.Component<undefined, undefined>{
                             <Col xs={6} md={6}>
                                 <Row className="show-grid">
                                     <Col xs={12} md={12}>
-                                        <Panel>
-                                            Video
-                                        </Panel>
+                                        <VideoPlayerContainer />
                                     </Col>
                                     <Col xs={12} md={12}>
-                                        <Panel>
-                                            <h4>Video Title</h4>
-                                            <p>Video Description</p>
-                                        </Panel>
+                                        <VideoDetail />
                                     </Col>
                                 </Row>
                             </Col>
                             <Col xs={6} md={6}>
-                                <Panel>
-                                    <Panel>
-                                        <Media>
-                                            <Media.Left align="top">
-                                                <img width={64} height={64} src="/assets/thumbnail.png" alt="Image" />
-                                            </Media.Left>
-                                            <Media.Body>
-                                                <Media.Heading>Top aligned media</Media.Heading>
-                                            </Media.Body>
-                                        </Media>
-                                    </Panel>
-                                    <Panel>
-                                        <Media>
-                                            <Media.Left align="top">
-                                                <img width={64} height={64} src="/assets/thumbnail.png" alt="Image" />
-                                            </Media.Left>
-                                            <Media.Body>
-                                                <Media.Heading>Top aligned media</Media.Heading>
-                                            </Media.Body>
-                                        </Media>
-                                    </Panel>
-                                    <Panel>
-                                        <Media>
-                                            <Media.Left align="top">
-                                                <img width={64} height={64} src="/assets/thumbnail.png" alt="Image" />
-                                            </Media.Left>
-                                            <Media.Body>
-                                                <Media.Heading>Top aligned media</Media.Heading>
-                                            </Media.Body>
-                                        </Media>
-                                    </Panel>
-                                </Panel>
+                                <VideoListContainer />
                             </Col>
                         </Row>
                     </Col>
