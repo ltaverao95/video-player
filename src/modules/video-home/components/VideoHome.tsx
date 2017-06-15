@@ -1,4 +1,7 @@
 import * as React from 'react';
+import axios from 'axios';
+import YTSearch from 'youtube-api-search';
+
 import {
     Grid,
     Row,
@@ -21,16 +24,20 @@ import {
     VideoListContainer
 } from '../../video-list/containers/VideoListContainer';
 
+const YOUTUBE_URL = 'https://www.googleapis.com/youtube/v3/search';
+const API_KEY = 'AIzaSyAvucYb8pcxTx20CHE6StwLF8iGT76K1RA';
+
 export class VideoHome extends React.Component<undefined, undefined>{
 
     render() {
+
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
                         <Row className="show-grid">
                             <div className="col-md-6 col-md-offset-3">
-                                <VideoSearchBarContainer />
+                                <VideoSearchBarContainer onVideoSearchBarTitleChanged={this.onVideoSearchBarTitleChanged} />
                             </div>
                         </Row>
                     </Col>
@@ -55,5 +62,21 @@ export class VideoHome extends React.Component<undefined, undefined>{
             </Grid>
         );
     }
+
+    private onVideoSearchBarTitleChanged(value: string){
+
+        const params = {
+            part: 'snippet',
+            key: API_KEY,
+            q: value,
+            type: 'video'
+        };
+
+        const request = axios.get(YOUTUBE_URL, { params: params });
+
+        request.then((data: any) => {
+            console.log(data.data);
+        });
+    }   
 
 }

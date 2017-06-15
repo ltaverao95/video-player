@@ -18,24 +18,15 @@ import {
 } from '../selectors';*/
 
 import { 
-    VideoSearchBar
+    VideoSearchBar,
+    VideoSearchBarProps,
+    VideoSearchBarDispatch,
+    OwnProps
 } from '../components/VideoSearchBar';
-
-interface OwnProps {
-
-}
-
-interface VideoSearchBarProps{
-    
-}
 
 const mapStateToProps = (appState: AppState): VideoSearchBarProps => ({    
     
 });
-
-interface VideoSearchBarDispatch{
-
-}
 
 const mapDispatchToProps = (dispatch: any /*redux.Dispatch<Captions.ManageCaptionViewModel>*/): VideoSearchBarDispatch => ({
     
