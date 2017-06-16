@@ -9,7 +9,8 @@ import {
 import {
 
     AppState,
-    VideoSearchBar as VideoSearchBarModule
+    VideoSearchBar as VideoSearchBarModule,
+    Common
 
 } from '../../domain';
 
@@ -24,9 +25,6 @@ export interface VideoSearchBarProps {
 export interface VideoSearchBarDispatch {
     storeVideosResult: (videoSearchViewModel: VideoSearchBarModule.VideoSearchViewModel) => void;
 }
-
-const YOUTUBE_URL = 'https://www.googleapis.com/youtube/v3/search';
-const API_KEY = 'AIzaSyAvucYb8pcxTx20CHE6StwLF8iGT76K1RA';
 
 export class VideoSearchBar extends React.Component<VideoSearchBarProps & VideoSearchBarDispatch & OwnProps, undefined>{
 
@@ -82,21 +80,21 @@ export class VideoSearchBar extends React.Component<VideoSearchBarProps & VideoS
 
         const params = {
             part: 'snippet',
-            key: API_KEY,
+            key: Common.API_KEY,
             q: this.videoSearchViewModel.videoSearchName,
             type: 'video'
         };
 
-        const request = axios.get(YOUTUBE_URL, { params: params });
+        const request = axios.get(Common.YOUTUBE_URL, { params: params });
 
         request.then((response: any) => {
             console.log(response.data);
 
-            let videoDTO = new VideoSearchBarModule.VideoDTO();
-
             this.videoSearchViewModel.videoSearchDTO.searchResult = [];
 
             response.data.items.map((item) => {
+
+                let videoDTO = new VideoSearchBarModule.VideoDTO();
 
                 videoDTO.id = item.id.videoId;
                 videoDTO.title = item.snippet.title;

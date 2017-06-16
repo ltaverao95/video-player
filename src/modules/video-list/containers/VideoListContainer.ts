@@ -5,37 +5,26 @@ import { connect } from 'react-redux';
 
 import {
 
-    AppState,    
+    AppState,
+    Actions,
+    Selectors
 
 } from '../../domain';
 
-/*import {
-    Actions
-} from '../actions';
-
-import {
-    Selectors
-} from '../selectors';*/
-
 import { 
+    
+    OwnProps,
+    VideoListProps,
+    VideoListDispatch,
     VideoList
+    
 } from '../components/VideoList';
 
-interface OwnProps {
 
-}
-
-interface VideoListProps{
-    
-}
 
 const mapStateToProps = (appState: AppState): VideoListProps => ({    
-    
+    videosList: Selectors.Videos.getVideosList(appState)
 });
-
-interface VideoListDispatch{
-
-}
 
 const mapDispatchToProps = (dispatch: any /*redux.Dispatch<Captions.ManageCaptionViewModel>*/): VideoListDispatch => ({
     

@@ -84,7 +84,7 @@ export namespace Services {
             let video = new Video();
 
             video.id = this.nextId.toString();
-            video.title = video.title;
+            video.title = videoDTO.title;
             video.videoImgUrl = videoDTO.imageUrl;
             video.videoDetailId = this.nextId.toString();
 

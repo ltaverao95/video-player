@@ -4,16 +4,39 @@ import {
 } from 'react-bootstrap';
 
 import {
+
+    Video
+
+} from '../../domain';
+
+import {
     VideoListItem
 } from '../../video-list-item/components/VideoListItem';
 
-export class VideoList extends React.Component<undefined, undefined>{
+export interface OwnProps {
+
+}
+
+export interface VideoListProps{
+    videosList: Array<Video>;
+}
+
+export interface VideoListDispatch{
+
+}
+
+export class VideoList extends React.Component<VideoListProps & VideoListDispatch & OwnProps, undefined>{
+
+    constructor(props: VideoListProps & VideoListDispatch & OwnProps){
+
+        super(props);
+    }
 
     render() {
 
         return (
             <Panel>
-                <VideoListItem />               
+                <VideoListItem videosList={this.props.videosList} />               
             </Panel>
         );
     }

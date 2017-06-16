@@ -1,4 +1,6 @@
 import * as u from 'updeep';
+import axios from 'axios';
+import YTSearch from 'youtube-api-search';
 
 import {
 
@@ -10,13 +12,15 @@ import {
 import {
 
     //Models
-    IdEntityBase
+    IdEntityBase,
+    Common,
+    VideoSearchBar
 
 } from './';
 
 export namespace Services {
 
-    export class EntityMapStorageService{
+    export class EntityMapStorageService {
 
         public storeById<TEntity extends IdEntityBase>(previousEntityMap: EntityMap<TEntity>, newEntityMap: TEntity): EntityMap<TEntity> {
 
@@ -31,9 +35,9 @@ export namespace Services {
             return newEntityMapState;
         }
 
-        public storeByAllIds(previousIdsList:Array<string>, idEntityBase:IdEntityBase) : Array<string>{
-            
-            if(previousIdsList.indexOf(idEntityBase.id) == -1){
+        public storeByAllIds(previousIdsList: Array<string>, idEntityBase: IdEntityBase): Array<string> {
+
+            if (previousIdsList.indexOf(idEntityBase.id) == -1) {
                 return [...previousIdsList, idEntityBase.id];
             }
 
