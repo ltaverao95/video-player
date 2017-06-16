@@ -27,6 +27,7 @@ export namespace Services {
 
         private dispatch: any;
         private getState: () => AppState;
+        private nextId: number;
 
         constructor(dispatch?: any, getStore?) {
 
@@ -66,12 +67,15 @@ export namespace Services {
 
         private storeVideos(videoSearchViewModelSelector: VideoSearchBar.VideoSearchViewModel){
 
+            this.nextId = 0;
 
             videoSearchViewModelSelector.videoSearchDTO.searchResult.map((videoDTO: VideoSearchBar.VideoDTO) => {
 
+                this.nextId++;
+
+                this.storeVideoComplete(videoDTO);
                 this.storeVideo(videoDTO);
                 this.storeVideoDetail(videoDTO);
-                this.storeVideoComplete(videoDTO);
             });
         }
 
@@ -79,10 +83,10 @@ export namespace Services {
 
             let video = new Video();
 
-            video.id = DomainSelectors.Videos.getNextVideoId(this.getState()).toString();
+            video.id = this.nextId.toString();
             video.title = video.title;
             video.videoImgUrl = videoDTO.imageUrl;
-            video.videoDetailId = DomainSelectors.VideosDetail.getNextVideoDetailId(this.getState());
+            video.videoDetailId = this.nextId.toString();
 
             this.dispatch(DomainActions.storeVideo(video));
         }
@@ -91,7 +95,7 @@ export namespace Services {
 
             let videoDetail = new VideoDetail();
 
-            videoDetail.id = DomainSelectors.VideosDetail.getNextVideoDetailId(this.getState());
+            videoDetail.id = this.nextId.toString();
             videoDetail.detail = videoDTO.detail;
             videoDetail.url = videoDTO.url;
 
@@ -102,9 +106,9 @@ export namespace Services {
 
             let videoComplete = new VideoComplete();
 
-            videoComplete.id = DomainSelectors.VideosComplete.getNextVideoCompleteId(this.getState());
-            videoComplete.videoId = DomainSelectors.Videos.getNextVideoId(this.getState());
-            videoComplete.videoDetailId = DomainSelectors.VideosDetail.getNextVideoDetailId(this.getState());
+            videoComplete.id = this.nextId.toString();
+            videoComplete.videoId = this.nextId.toString();
+            videoComplete.videoDetailId = this.nextId.toString();
 
             this.dispatch(DomainActions.storeVideoComplete(videoComplete));
         }

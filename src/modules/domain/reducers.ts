@@ -19,7 +19,8 @@ import {
     VideoDetail,
     VideoComplete,
     CommonConfiguration,
-    InterfaceConfiguration
+    InterfaceConfiguration,
+    Services
 
 } from './';
 
@@ -32,9 +33,8 @@ export namespace Reducers {
             switch(action.type)
             {
                 case ActionTypes.ADD_VIDEO:
-                    return {
-                        ...state
-                    }
+                    let entityStorageService = new Services.EntityMapStorageService();
+                    return entityStorageService.storeById<Video>(state, action.video);
             }
 
             return state;
@@ -45,7 +45,8 @@ export namespace Reducers {
             switch(action.type)
             {
                 case ActionTypes.ADD_VIDEO:
-                    return [...state, action.video.id]
+                    let entityStorageService = new Services.EntityMapStorageService();
+                    return entityStorageService.storeByAllIds(state, action.video);
             }
 
             return state;
@@ -64,9 +65,8 @@ export namespace Reducers {
             switch(action.type)
             {
                 case ActionTypes.ADD_VIDEO_DETAIL:
-                    return {
-                        ...state
-                    }
+                    let entityStorageService = new Services.EntityMapStorageService();
+                    return entityStorageService.storeById<VideoDetail>(state, action.videoDetail);
             }
 
             return state;
@@ -77,7 +77,8 @@ export namespace Reducers {
             switch(action.type)
             {
                 case ActionTypes.ADD_VIDEO_DETAIL:
-                    return [...state, action.videoDetail.id]
+                    let entityStorageService = new Services.EntityMapStorageService();
+                    return entityStorageService.storeByAllIds(state, action.videoDetail);
             }
 
             return state;
@@ -96,9 +97,8 @@ export namespace Reducers {
             switch(action.type)
             {
                 case ActionTypes.ADD_VIDEO_COMPLETED:
-                    return {
-                        ...state
-                    }
+                    let entityStorageService = new Services.EntityMapStorageService();
+                    return entityStorageService.storeById<VideoComplete>(state, action.videoComplete);
             }
 
             return state;
@@ -109,7 +109,8 @@ export namespace Reducers {
             switch(action.type)
             {
                 case ActionTypes.ADD_VIDEO_COMPLETED:
-                    return [...state, action.videoComplete.id]
+                    let entityStorageService = new Services.EntityMapStorageService();
+                    return entityStorageService.storeByAllIds(state, action.videoComplete);
             }
 
             return state;

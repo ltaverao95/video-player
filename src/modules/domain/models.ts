@@ -5,6 +5,10 @@ import {
     EntityNormalizedObj
 } from '../utils';
 
+interface IdEntityBase {
+    id: string;
+}
+
 class Video{
     id: string;
     title: string;
@@ -40,5 +44,6 @@ export {
     VideoDetail,
     VideoComplete,
     CommonConfiguration,
-    InterfaceConfiguration
+    InterfaceConfiguration,
+    IdEntityBase
 }
