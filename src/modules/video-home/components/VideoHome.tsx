@@ -1,6 +1,4 @@
 import * as React from 'react';
-import axios from 'axios';
-import YTSearch from 'youtube-api-search';
 
 import {
     Grid,
@@ -24,9 +22,6 @@ import {
     VideoListContainer
 } from '../../video-list/containers/VideoListContainer';
 
-const YOUTUBE_URL = 'https://www.googleapis.com/youtube/v3/search';
-const API_KEY = 'AIzaSyAvucYb8pcxTx20CHE6StwLF8iGT76K1RA';
-
 export class VideoHome extends React.Component<undefined, undefined>{
 
     render() {
@@ -37,10 +32,13 @@ export class VideoHome extends React.Component<undefined, undefined>{
                     <Col xs={12} md={12}>
                         <Row className="show-grid">
                             <div className="col-md-6 col-md-offset-3">
-                                <VideoSearchBarContainer onVideoSearchBarTitleChanged={this.onVideoSearchBarTitleChanged} />
+                                <VideoSearchBarContainer />
                             </div>
                         </Row>
                     </Col>
+
+                    <br/> <br/> <br/>
+
                     <Col xs={12} md={12}>
                         <Row className="show-grid">
                             <Col xs={6} md={6}>
@@ -61,22 +59,6 @@ export class VideoHome extends React.Component<undefined, undefined>{
                 </Row>
             </Grid>
         );
-    }
-
-    private onVideoSearchBarTitleChanged(value: string){
-
-        const params = {
-            part: 'snippet',
-            key: API_KEY,
-            q: value,
-            type: 'video'
-        };
-
-        const request = axios.get(YOUTUBE_URL, { params: params });
-
-        request.then((data: any) => {
-            console.log(data.data);
-        });
     }   
 
 }

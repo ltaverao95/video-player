@@ -5,17 +5,20 @@ import { connect } from 'react-redux';
 
 import {
 
-    AppState,    
+    AppState,
+    VideoSearchBar as VideoSearchBarModule
 
 } from '../../domain';
 
-/*import {
+import {
+
     Actions
-} from '../actions';
+
+} from '../';
 
 import {
     Selectors
-} from '../selectors';*/
+} from '../selectors';
 
 import { 
     VideoSearchBar,
@@ -25,11 +28,11 @@ import {
 } from '../components/VideoSearchBar';
 
 const mapStateToProps = (appState: AppState): VideoSearchBarProps => ({    
-    
+    videoSearchViewModel: Selectors.VideoSearchBar.getSelectVideoSearchViewModel(appState)
 });
 
-const mapDispatchToProps = (dispatch: any /*redux.Dispatch<Captions.ManageCaptionViewModel>*/): VideoSearchBarDispatch => ({
-    
+const mapDispatchToProps = (dispatch: redux.Dispatch<VideoSearchBarModule.VideoSearchViewModel>): VideoSearchBarDispatch => ({
+    storeVideosResult: (videoSearchViewModel: VideoSearchBarModule.VideoSearchViewModel) => dispatch(Actions.storeVideosResult(videoSearchViewModel))
 });
 
 export const VideoSearchBarContainer: React.ComponentClass<OwnProps> =

@@ -8,6 +8,7 @@ import {
 class Video{
     id: string;
     title: string;
+    videoImgUrl: string;
     videoDetailId: string;
 }
 

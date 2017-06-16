@@ -1,23 +1,36 @@
 import * as React from 'react';
+import axios from 'axios';
+import YTSearch from 'youtube-api-search';
+
 import {
     Glyphicon
 } from 'react-bootstrap';
 
+import {
+
+    AppState,
+    VideoSearchBar as VideoSearchBarModule
+
+} from '../../domain';
+
 export interface OwnProps {
-    onVideoSearchBarTitleChanged: (value: string) => void;
+
 }
 
 export interface VideoSearchBarProps {
-
+    videoSearchViewModel: VideoSearchBarModule.VideoSearchViewModel;
 }
 
 export interface VideoSearchBarDispatch {
-
+    storeVideosResult: (videoSearchViewModel: VideoSearchBarModule.VideoSearchViewModel) => void;
 }
+
+const YOUTUBE_URL = 'https://www.googleapis.com/youtube/v3/search';
+const API_KEY = 'AIzaSyAvucYb8pcxTx20CHE6StwLF8iGT76K1RA';
 
 export class VideoSearchBar extends React.Component<VideoSearchBarProps & VideoSearchBarDispatch & OwnProps, undefined>{
 
-    private currentVideoTitle: string;
+    private videoSearchViewModel: VideoSearchBarModule.VideoSearchViewModel;
 
     constructor(props: VideoSearchBarProps & VideoSearchBarDispatch & OwnProps) {
         super(props);
@@ -57,14 +70,52 @@ export class VideoSearchBar extends React.Component<VideoSearchBarProps & VideoS
     }
 
     private initialize() {
-        this.currentVideoTitle = null;
+        this.videoSearchViewModel = JSON.parse(JSON.stringify(this.props.videoSearchViewModel));
     }
 
     private onSearchBarTitleClicked() {
-        this.props.onVideoSearchBarTitleChanged(this.currentVideoTitle);
+
+        if (!this.videoSearchViewModel.videoSearchName ||
+            this.videoSearchViewModel.videoSearchName.length == 0) {
+            return;
+        }
+
+        const params = {
+            part: 'snippet',
+            key: API_KEY,
+            q: this.videoSearchViewModel.videoSearchName,
+            type: 'video'
+        };
+
+        const request = axios.get(YOUTUBE_URL, { params: params });
+
+        request.then((response: any) => {
+            console.log(response.data);
+
+            let videoDTO = new VideoSearchBarModule.VideoDTO();
+
+            this.videoSearchViewModel.videoSearchDTO.searchResult = [];
+
+            response.data.items.map((item) => {
+
+                videoDTO.id = item.id.videoId;
+                videoDTO.title = item.snippet.title;
+                videoDTO.imageUrl = item.snippet.thumbnails.medium.url;
+                videoDTO.detail = item.snippet.description;
+
+                this.videoSearchViewModel.videoSearchDTO.searchResult.push(videoDTO);
+            });
+
+            if (!this.videoSearchViewModel.videoSearchDTO.searchResult ||
+                this.videoSearchViewModel.videoSearchDTO.searchResult.length == 0) {
+                return;
+            }
+
+            this.props.storeVideosResult(this.videoSearchViewModel);
+        });
     }
 
     private onSearchBarTitleChanged(evt: any) {
-        this.currentVideoTitle = evt.target.value;
+        this.videoSearchViewModel.videoSearchName = evt.target.value;
     }
 }

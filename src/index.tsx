@@ -7,14 +7,14 @@ import {
 } from './store';
 
 import {
-    VideoHomeContainer
-} from './modules/video-home/containers/VideoHomeContainer';
+    VideoHome
+} from './modules/video-home/components/VideoHome';
 
 const rootApp = document.getElementById("root-app");
 
 ReactDOM.render(
     <Provider store={store}>
-        <VideoHomeContainer />
+        <VideoHome />
     </Provider>,
     rootApp
 );
