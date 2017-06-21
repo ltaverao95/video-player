@@ -96,7 +96,8 @@ export namespace Services {
             let videoDetail = new VideoDetail();
 
             videoDetail.id = this.nextId.toString();
-            videoDetail.detail = videoDTO.detail;
+            videoDetail.description = videoDTO.detail;
+            videoDetail.title = videoDTO.title
             videoDetail.url = videoDTO.url;
 
             this.dispatch(DomainActions.storeVideoDetail(videoDetail));

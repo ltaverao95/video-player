@@ -7,6 +7,12 @@ import {
 } from 'react-bootstrap';
 
 import {
+
+    Video
+
+} from '../../domain';
+
+import {
     VideoSearchBarContainer
 } from '../../video-search-bar/containers/VideoSearchBarContainer';
 
@@ -15,8 +21,8 @@ import {
 } from '../../video-player/containers/VideoPlayerContainer';
 
 import {
-    VideoDetail
-} from '../../video-detail/components/VideoDetail';
+    VideoDetailContainer
+} from '../../video-detail/containers/VideoDetailContainer';
 
 import {
     VideoListContainer
@@ -47,7 +53,7 @@ export class VideoHome extends React.Component<undefined, undefined>{
                                         <VideoPlayerContainer />
                                     </Col>
                                     <Col xs={12} md={12}>
-                                        <VideoDetail />
+                                        <VideoDetailContainer />
                                     </Col>
                                 </Row>
                             </Col>
@@ -59,6 +65,5 @@ export class VideoHome extends React.Component<undefined, undefined>{
                 </Row>
             </Grid>
         );
-    }   
-
+    }
 }

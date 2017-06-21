@@ -5,7 +5,10 @@ import {
 
 import {
 
-    Video
+    Video,
+    VideoDetail,
+    VideoDetailModel,
+    VideoPlayerModel
 
 } from '../../domain';
 
@@ -14,29 +17,29 @@ import {
 } from '../../video-list-item/components/VideoListItem';
 
 export interface OwnProps {
-
+    
 }
 
 export interface VideoListProps{
     videosList: Array<Video>;
+    videosDetailList: Array<VideoDetail>;
 }
 
 export interface VideoListDispatch{
-
+    updateVideoDetail: (videoDetailViewModel: VideoDetailModel.VideoDetailViewModel) => void;
+    updateVideoPlayer: (videoPlayerViewModel: VideoPlayerModel.VideoPlayerViewModel) => void;
 }
 
 export class VideoList extends React.Component<VideoListProps & VideoListDispatch & OwnProps, undefined>{
-
-    constructor(props: VideoListProps & VideoListDispatch & OwnProps){
-
-        super(props);
-    }
 
     render() {
 
         return (
             <Panel>
-                <VideoListItem videosList={this.props.videosList} />               
+                <VideoListItem videosList={this.props.videosList}
+                               videosDetailList={this.props.videosDetailList}
+                               updateVideoDetail={this.props.updateVideoDetail}
+                               updateVideoPlayer={this.props.updateVideoPlayer} />               
             </Panel>
         );
     }

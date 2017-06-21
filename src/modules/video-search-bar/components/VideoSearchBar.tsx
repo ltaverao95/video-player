@@ -1,6 +1,5 @@
 import * as React from 'react';
-import axios from 'axios';
-import YTSearch from 'youtube-api-search';
+import axios, { AxiosPromise, AxiosResponse } from 'axios';
 
 import {
     Glyphicon
@@ -78,31 +77,13 @@ export class VideoSearchBar extends React.Component<VideoSearchBarProps & VideoS
             return;
         }
 
-        const params = {
-            part: 'snippet',
-            key: Common.API_KEY,
-            q: this.videoSearchViewModel.videoSearchName,
-            type: 'video'
-        };
+        let videoSearchServices = new Common.Services.VideoSearchServices();
 
-        const request = axios.get(Common.YOUTUBE_URL, { params: params });
+        const request = videoSearchServices.searchVideos(this.videoSearchViewModel.videoSearchName);
+        
+        request.then((response: AxiosResponse) => {
 
-        request.then((response: any) => {
-            console.log(response.data);
-
-            this.videoSearchViewModel.videoSearchDTO.searchResult = [];
-
-            response.data.items.map((item) => {
-
-                let videoDTO = new VideoSearchBarModule.VideoDTO();
-
-                videoDTO.id = item.id.videoId;
-                videoDTO.title = item.snippet.title;
-                videoDTO.imageUrl = item.snippet.thumbnails.medium.url;
-                videoDTO.detail = item.snippet.description;
-
-                this.videoSearchViewModel.videoSearchDTO.searchResult.push(videoDTO);
-            });
+            this.videoSearchViewModel = videoSearchServices.mapVideosList(response);
 
             if (!this.videoSearchViewModel.videoSearchDTO.searchResult ||
                 this.videoSearchViewModel.videoSearchDTO.searchResult.length == 0) {

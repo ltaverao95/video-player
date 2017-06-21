@@ -1,14 +1,26 @@
 import {
     InterfaceConfiguration,
-    VideoSearchBar
+    VideoSearchBar,
+    VideoDetailModel,
+    VideoPlayerModel
 } from './';
 
 class VideoSearchBarModule{
-    videoSearchViewModel: VideoSearchBar.VideoSearchViewModel
+    videoSearchViewModel: VideoSearchBar.VideoSearchViewModel;
+}
+
+class VideoDetailModule{
+    videoDetailViewModel: VideoDetailModel.VideoDetailViewModel;
+}
+
+class VideoPlayerModule{
+    videoPlayerViewModel: VideoPlayerModel.VideoPlayerViewModel
 }
 
 class UI{
     videoSearchBarModule: VideoSearchBarModule;
+    videoDetailModule: VideoDetailModule;
+    videoPlayerModule: VideoPlayerModule;
 }
 
 class AppState{
@@ -20,5 +32,7 @@ export
 {
     AppState,
     UI,
-    VideoSearchBarModule
+    VideoSearchBarModule,
+    VideoDetailModule,
+    VideoPlayerModule
 }

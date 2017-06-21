@@ -1,6 +1,4 @@
 import * as u from 'updeep';
-import axios from 'axios';
-import YTSearch from 'youtube-api-search';
 
 import {
 

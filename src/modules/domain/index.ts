@@ -7,3 +7,5 @@ export * from './common';
 export * from './actions';
 export * from './actionTypes';
 export * from './videoSearchBar';
+export * from './videoDetail';
+export * from './videoPlayer';

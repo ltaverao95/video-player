@@ -1,43 +1,33 @@
 import * as React from 'react';
 import * as redux from 'redux';
-import { Action } from 'redux';
 import { connect } from 'react-redux';
 
 import {
 
-    AppState,    
+    AppState,
+
+    VideoPlayerModel
 
 } from '../../domain';
 
-/*import {
-    Actions
-} from '../actions';
-
 import {
     Selectors
-} from '../selectors';*/
+} from '../selectors';
 
 import { 
-    VideoPlayer
+    
+    VideoPlayer,
+    VideoPlayerProps,
+    VideoPlayerDispatch,
+    OwnProps
+
 } from '../components/VideoPlayer';
 
-interface OwnProps {
-
-}
-
-interface VideoPlayerProps{
-    
-}
-
 const mapStateToProps = (appState: AppState): VideoPlayerProps => ({    
-    
+    videoPlayerViewModel: Selectors.VideoPlayer.getSelectVideoPlayerViewModel(appState)
 });
 
-interface VideoPlayerDispatch{
-
-}
-
-const mapDispatchToProps = (dispatch: any /*redux.Dispatch<Captions.ManageCaptionViewModel>*/): VideoPlayerDispatch => ({
+const mapDispatchToProps = (dispatch: redux.Dispatch<VideoPlayerModel.VideoPlayerViewModel>): VideoPlayerDispatch => ({
     
 });
 

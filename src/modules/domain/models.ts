@@ -18,7 +18,8 @@ class Video{
 
 class VideoDetail{
     id: string;
-    detail: string;
+    title: string;
+    description: string;
     url: string;
 }
 

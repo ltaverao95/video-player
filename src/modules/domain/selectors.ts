@@ -111,10 +111,12 @@ export namespace Selectors{
         export const getVideoDetailById = (videoDetailId:string) => {
             return createSelector(
                 getVideosDetailList,
-                (videosList:Array<VideoDetail>): VideoDetail => {
-                    return videosList.find((videoDetail:VideoDetail)=> videoDetail.id == videoDetailId);
+                (videosList:Array<VideoDetail>): Array<VideoDetail> => {
+                    return videosList.filter((videoDetail:VideoDetail) => {
+                        return videoDetail.id == videoDetailId
+                    });
                 }
-            );
+            ); 
         };
     }
 
