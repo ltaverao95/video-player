@@ -42,7 +42,7 @@ export class VideoSearchBar extends React.Component<VideoSearchBarProps & VideoS
 
         return (
             <form>
-                <table width="100%">
+                <table style={{width: "100%"}}>
                     <tbody>
                         <tr>
                             <td>
